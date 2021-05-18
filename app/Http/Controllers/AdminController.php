@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Features;
 use Illuminate\Routing\Pipeline;
+use Illuminate\Routing\Controller;
+use App\Http\Responses\LoginResponse;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use App\Actions\Fortify\AttemptToAuthenticate;
+use Laravel\Fortify\Http\Requests\LoginRequest;
+use Laravel\Fortify\Contracts\LoginViewResponse;
+use Laravel\Fortify\Http\Responses\LogoutResponse;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
-use App\Http\Responses\LoginResponse;
-use Laravel\Fortify\Contracts\LoginViewResponse;
-use Laravel\Fortify\Contracts\LogoutResponse;
-use Laravel\Fortify\Features;
-use Laravel\Fortify\Fortify;
-use Laravel\Fortify\Http\Requests\LoginRequest;
 
 class AdminController extends Controller
 {
@@ -39,7 +39,7 @@ class AdminController extends Controller
     }
 
     public function loginForm(){
-    	return view('auth.login', ['guard' => 'admin']);
+    	return view('auth.admin_login', ['guard' => 'admin']);
     }
 
     /**
