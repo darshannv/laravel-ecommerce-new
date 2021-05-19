@@ -1,37 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AdminProfileController extends Controller
+class IndexController extends Controller
 {
-    public function adminProfile(){
-        $adminData = Admin::find(1);
-        return view('admin.admin_profile_view', compact('adminData'));
+    public function index(){
+        return view('frontend.index');
     }
 
-    public function adminProfileEdit(){
-        $editData = Admin::find(1);
-        return view('admin.admin_profile_edit', compact('editData'));
+    public function userLogout(){
+        Auth::logout();
+        return redirect()->route('login');
     }
 
-    public function adminProfileStore(Request $request){
-        $data = Admin::find(1);
+    public function userProfile(){
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        return view('frontend.profile.user_profile', compact('user'));
+
+    }
+
+    public function userProfileStore(Request $request){
+
+        $id = Auth::user()->id;
+        $data = User::find($id);
+      
         $data->name = $request->name;
         $data->email = $request->email;
+        $data->phone = $request->phone;
 
         if($request->file('profile_photo_path')){
             $file = $request->file('profile_photo_path');
             if(!empty($data->profile_photo_path)){
-                @unlink(public_path('upload/admin_images/'.$data->profile_photo_path));
+                @unlink(public_path('upload/user_images/'.$data->profile_photo_path));
             }
             $fileName = date('YmdHi'). $file->getClientOriginalName();
-                $file->move(public_path('upload/admin_images'), $fileName);
+                $file->move(public_path('upload/user_images'), $fileName);
                 $data['profile_photo_path'] = $fileName;
            
         }
@@ -42,32 +51,29 @@ class AdminProfileController extends Controller
             'message' => 'Profile Updated Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('admin.profile')->with($notification);
-
+        return redirect()->route('dashboard')->with($notification);
     }
 
-    public function adminProfilePassword(){
-
-        return view('admin.admin_change_password');
+    public function userPassword(){
+        return view('frontend.profile.change_password');
     }
 
-    public function adminPasswordUpdate(Request $request){
+    public function userPasswordUpdate(Request $request){
 
-        
         $validateData = $request->validate([
 
             'old_password' => 'required',
             'password' => 'required|confirmed',
         ]);
        
-        $hashedPassword = Admin::find(1)->password;
+        $hashedPassword = Auth::user()->password;
 
         if(Hash::check($request->old_password, $hashedPassword)){
             
-            $admin = Admin::find(1);
-            $admin->password = Hash::make($request->password);
+            $user = User::find(Auth::id());
+            $user->password = Hash::make($request->password);
            
-            $admin->save();
+            $user->save();
             Auth::logout();
 
             $notification = array(
@@ -75,7 +81,7 @@ class AdminProfileController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('admin.logout')->with($notification);
+            return redirect()->route('user.logout')->with($notification);
 
             
         } else {
@@ -87,6 +93,5 @@ class AdminProfileController extends Controller
 
             return redirect()->back()->with($notification);
         }
-        
     }
 }
