@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
@@ -65,7 +66,7 @@
           <div class="media-list media-list-hover mt-20">
 			<div class="media py-10 px-0">
 			  <a class="avatar avatar-lg status-success" href="#">
-				<img src="../images/avatar/1.jpg" alt="...">
+				<img src="{{ asset('backend/images/avatar/1.jpg') }}" alt="...">
 			  </a>
 			  <div class="media-body">
 				<p class="font-size-16">
@@ -78,7 +79,7 @@
 
 			<div class="media py-10 px-0">
 			  <a class="avatar avatar-lg status-danger" href="#">
-				<img src="../images/avatar/2.jpg" alt="...">
+				<img src="{{ asset('backend/images/avatar/2.jpg') }}" alt="...">
 			  </a>
 			  <div class="media-body">
 				<p class="font-size-16">
@@ -91,7 +92,7 @@
 
 			<div class="media py-10 px-0">
 			  <a class="avatar avatar-lg status-warning" href="#">
-				<img src="../images/avatar/3.jpg" alt="...">
+				<img src="{{ asset('backend/images/avatar/3.jpg') }}" alt="...">
 			  </a>
 			  <div class="media-body">
 				<p class="font-size-16">
@@ -104,7 +105,7 @@
 
 			<div class="media py-10 px-0">
 			  <a class="avatar avatar-lg status-primary" href="#">
-				<img src="../images/avatar/4.jpg" alt="...">
+				<img src="{{ asset('backend/images/avatar/4.jpg') }}" alt="...">
 			  </a>
 			  <div class="media-body">
 				<p class="font-size-16">
@@ -117,7 +118,7 @@
 			
 			<div class="media py-10 px-0">
 			  <a class="avatar avatar-lg status-success" href="#">
-				<img src="../images/avatar/1.jpg" alt="...">
+				<img src="{{ asset('backend/images/avatar/1.jpg') }}" alt="...">
 			  </a>
 			  <div class="media-body">
 				<p class="font-size-16">
@@ -130,7 +131,7 @@
 
 			<div class="media py-10 px-0">
 			  <a class="avatar avatar-lg status-danger" href="#">
-				<img src="../images/avatar/2.jpg" alt="...">
+				<img src="{{ asset('backend/images/avatar/2.jpg') }}" alt="...">
 			  </a>
 			  <div class="media-body">
 				<p class="font-size-16">
@@ -143,7 +144,7 @@
 
 			<div class="media py-10 px-0">
 			  <a class="avatar avatar-lg status-warning" href="#">
-				<img src="../images/avatar/3.jpg" alt="...">
+				<img src="{{ asset('backend/images/avatar/3.jpg') }}" alt="...">
 			  </a>
 			  <div class="media-body">
 				<p class="font-size-16">
@@ -156,7 +157,7 @@
 
 			<div class="media py-10 px-0">
 			  <a class="avatar avatar-lg status-primary" href="#">
-				<img src="../images/avatar/4.jpg" alt="...">
+				<img src="{{ asset('backend/images/avatar/4.jpg') }}" alt="...">
 			  </a>
 			  <div class="media-body">
 				<p class="font-size-16">
@@ -349,5 +350,35 @@ switch(type) {
 @endif
 
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+	$(function(){
+		$(document).on('click', '#delete', function(e){
+			e.preventDefault();
+			var link = $(this).attr("href");
+		
+				Swal.fire({
+				title: 'Are you sure?',
+				text: "You won't be able to revert this!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.href = link
+					Swal.fire(
+					'Deleted!',
+					'Your file has been deleted.',
+					'success'
+					)
+				}
+			})
+		});
+	});
+
+</script>
+
 </body>
 </html>
