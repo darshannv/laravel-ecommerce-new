@@ -35,9 +35,9 @@
                         
                           @foreach ($subsubcategory as $item)
                           <tr>
-                            <td>{{ $item->category->category_name_en }}</td>
-                              <td>{{ $item->subcategory->subcategory_name_en }}</td>
-                              <td>{{ $item->subsubcategory_name_hin }}</td>
+                            <td>{{ $item->category ? $item->category->category_name_en : ''}}</td>
+                              <td>{{$item->subcategory ? $item->subcategory->subcategory_name_en : '' }}</td>
+                              <td>{{ $item->subsubcategory_name_en }}</td>
                               <td width="100px;">
                                   <a href="{{ route('subsubcategory.edit', $item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
                                   <a href="{{ route('subsubcategory.delete', $item->id) }}" id="delete" class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
