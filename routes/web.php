@@ -109,6 +109,28 @@ Route::prefix('product')->group(function(){
     Route::get('/add', [ProductController::class, 'addProduct'])->name('add.product');
     Route::post('/store', [ProductController::class, 'storeProduct'])->name('product.store');
     Route::get('/manage', [ProductController::class, 'manageProduct'])->name('manage.product');
+    Route::get('/edit/{id}', [ProductController::class, 'editProduct'])->name('product.edit');
+    Route::get('/show/{id}', [ProductController::class, 'showProduct'])->name('product.show');
+    Route::post('/update', [ProductController::class, 'updateProduct'])->name('product.update');
+    Route::post('/image/update', [ProductController::class, 'multiImageUpdate'])->name('update.product.image');
+    Route::post('/thumbnail/update', [ProductController::class, 'thumbnailUpdate'])->name('update.product.thumbnail');
+    Route::get('/delete/{id}', [ProductController::class, 'deleteProduct'])->name('product.delete');
+    Route::get('/multiimg/delete/{id}', [ProductController::class, 'multiImgDelete'])->name('product.multiimg.delete');
 
+    Route::get('/inactive/{id}', [ProductController::class, 'productInactive'])->name('product.inactive');
+    Route::get('/active/{id}', [ProductController::class, 'productActive'])->name('product.active');
+
+
+
+});
+
+        //------------- Manage Slider -------------------------
+Route::prefix('slider')->group(function(){
+    
+    Route::get('/view', [BrandController::class, 'brandView'])->name('all.brand');
+    Route::post('/store', [BrandController::class, 'brandStore'])->name('brand.store');
+    Route::get('/edit/{id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
+    Route::post('/update', [BrandController::class, 'brandUpdate'])->name('brand.update');
+    Route::get('/delete/{id}', [BrandController::class, 'brandDelete'])->name('brand.delete');
 
 });
