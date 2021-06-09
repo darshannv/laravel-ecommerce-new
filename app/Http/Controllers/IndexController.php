@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Slider;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use App\Models\SubSubCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
     public function index(){
-        return view('frontend.index');
+        $products = Product::where('status',  1)->orderBy('id', 'DESC')->get();
+        $sliders = Slider::where('status',  1)->orderBy('id', 'DESC')->limit(3)->get();
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        return view('frontend.index', compact('categories', 'sliders', 'products'));
     }
 
     public function userLogout(){
