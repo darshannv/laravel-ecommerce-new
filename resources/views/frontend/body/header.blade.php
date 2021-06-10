@@ -176,9 +176,10 @@
 
               @foreach($subcategories as $subcategory)
                 <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                  <a href="{{ url('subcategory/product/'. $subcategory->id.'/'.$subcategory->subcategory_slug_en) }}">
                   <h2 class="title">
                     @if(session()->get('language') == 'hindi'){{ $subcategory->subcategory_name_hin }} @else {{ $subcategory->subcategory_name_en }}  @endif
-                    </h2>
+                    </h2></a>
 
 
     @php
@@ -186,7 +187,7 @@
     @endphp
                 @foreach ($subsubcategories as $subsub)
                   <ul class="links">
-                    <li><a href="#">
+                    <li><a href="{{ url('subsubcategory/product/'. $subsub->id.'/'.$subsub->subsubcategory_slug_en) }}">
                       @if(session()->get('language') == 'hindi'){{ $subsub->subsubcategory_name_hin }} @else {{ $subsub->subsubcategory_name_en }}  @endif
                       </a></li>
                   </ul>

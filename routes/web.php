@@ -146,3 +146,19 @@ Route::post('/user/password/update', [IndexController::class, 'userPasswordUpdat
 //------------------- Multi-Language routes --------------------------
 Route::get('/language/english', [LanguageController::class, 'english'])->name('english.language');
 Route::get('/language/hindi', [LanguageController::class, 'hindi'])->name('hindi.language');
+
+
+//----------------- Frontend Product Details -----------------------
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'productDetails']);
+
+
+
+//----------------- Frontend Product Tags ---------------------------
+Route::get('/product/tag/{tag}', [IndexController::class, 'tagWiseProduct']);
+
+
+//---------------- Subcategory wise data -------------------------------
+Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'subcatWiseProduct']);
+
+//---------------- Sub->Subcategory wise data -------------------------------
+Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'subsubcatWiseProduct']);
