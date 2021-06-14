@@ -401,7 +401,7 @@
                                 
                                 <div class="controls">
                                     <fieldset>
-                                        <input type="checkbox" id="checkbox_2" name="hot_deals" required value="1" {{ $product->hot_deals == 1 ? 'checked' : '' }}>
+                                        <input type="checkbox" id="checkbox_2" name="hot_deals"  value="1" {{ $product->hot_deals == 1 ? 'checked' : '' }}>
                                         <label for="checkbox_2">Hot Deals</label>
                                     </fieldset>
                                     <fieldset>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LanguageController;
 
@@ -162,3 +163,19 @@ Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, '
 
 //---------------- Sub->Subcategory wise data -------------------------------
 Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'subsubcatWiseProduct']);
+
+//---------------- Product View Modal with Ajax -------------------------------
+Route::get('/product/view/modal/{id}', [IndexController::class, 'productViewAjax']);
+
+//---------------- Add to Cart with Ajax -------------------------------
+Route::post('/cart/data/store/{id}', [CartController::class, 'addToCart']);
+
+//----------------Get Data from Mini cart with Ajax -------------------------------
+Route::get('/product/mini/cart', [CartController::class, 'addMiniCart']);
+
+
+//----------------Remove Mini cart with Ajax -------------------------------
+Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMiniCart']);
+
+//---------------- Add to wishlist with Ajax -------------------------------
+Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'addToWishlist']);

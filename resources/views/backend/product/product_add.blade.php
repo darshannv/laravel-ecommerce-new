@@ -427,7 +427,7 @@
                                 
                                 <div class="controls">
                                     <fieldset>
-                                        <input type="checkbox" id="checkbox_2" name="hot_deals" required value="1">
+                                        <input type="checkbox" id="checkbox_2" name="hot_deals" value="1">
                                         <label for="checkbox_2">Hot Deals</label>
                                     </fieldset>
                                     <fieldset>
