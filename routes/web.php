@@ -5,12 +5,15 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,6 +132,22 @@ Route::middleware(['auth:admin'])->group(function(){
     
     });
 
+
+
+        //------------- Manage Coupons -------------------------
+        Route::prefix('coupons')->group(function(){
+
+            Route::get('/view', [CouponController::class, 'couponView'])->name('manage.coupons');
+            Route::post('/store', [CouponController::class, 'couponStore'])->name('coupon.store');
+            Route::get('/edit/{id}', [CouponController::class, 'couponEdit'])->name('coupon.edit');
+            Route::post('/update', [CouponController::class, 'couponUpdate'])->name('coupon.update');
+            Route::get('/delete/{id}', [CouponController::class, 'couponDelete'])->name('coupon.delete');
+        
+            Route::get('/inactive/{id}', [CouponController::class, 'couponInactive'])->name('coupon.inactive');
+            Route::get('/active/{id}', [CouponController::class, 'couponActive'])->name('coupon.active');
+        
+        });
+
 });
 
 //user routes
@@ -179,3 +198,34 @@ Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'removeMi
 
 //---------------- Add to wishlist with Ajax -------------------------------
 Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'addToWishlist']);
+
+Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function(){
+
+
+        //--------------- Wishlist Page -------------------------------
+    Route::get('/wishlist', [WishlistController::class, 'viewWishlist'])->name('wishlist');
+
+    //--------------- Get Wishlist Product -------------------------------
+    Route::get('/get-wishlist-product', [WishlistController::class, 'getWishlistProduct']);
+
+    //---------------  Wishlist Remove -------------------------------
+    Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
+
+   
+});
+
+
+ //Cart Routes  -----------
+ Route::get('/myCart', [CartPageController::class, 'myCart'])->name('myCart');
+
+ //--------------- get Cart Product -------------------------------
+ Route::get('/user/get-cart-product', [CartPageController::class, 'getCartProduct']);
+
+//--------------- remove Cart Product -------------------------------
+Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'removeCartProduct']);
+
+//---------------  Cart Increment -------------------------------
+Route::get('/cart-increment/{rowId}', [CartPageController::class, 'cartIncrement']);
+
+//---------------  Cart Decrement -------------------------------
+Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'cartDecrement']);

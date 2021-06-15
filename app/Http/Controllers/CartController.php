@@ -23,8 +23,8 @@ class CartController extends Controller
                 'weight' => 1, 
                 'options' => [
                     'image' => $product->product_thumbnail,
-                    'size' => $request->product_name,
-                    'color' => $request->product_name,
+                    'size' => $request->size,
+                    'color' => $request->color,
                     ]]);
 
                     return response()->json(['success' => 'Successfully Added to Cart']);
@@ -38,8 +38,8 @@ class CartController extends Controller
                 'weight' => 1, 
                 'options' => [
                     'image' => $product->product_thumbnail,
-                    'size' => $request->product_name,
-                    'color' => $request->product_name,
+                    'size' => $request->size,
+                    'color' => $request->color,
                     ]]);
                     return response()->json(['success' => 'Successfully Added to Cart']);
 
@@ -78,13 +78,18 @@ class CartController extends Controller
 
             $exists = Wishlist::where('user_id', Auth::id())->where('product_id', $product_id)->first();
 
-            Wishlist::insert([
-                'user_id' => Auth::id(),
-                'product_id' => $product_id,
-                'created_at' => Carbon::now(),
-            ]);
+            if(!$exists){
+                Wishlist::insert([
+                    'user_id' => Auth::id(),
+                    'product_id' => $product_id,
+                    'created_at' => Carbon::now(),
+                ]);
+                return response()->json(['success' => 'Successfully added to Wishlist']);
+            }else{
+                return response()->json(['error' => 'This Product is already in your Wishlist']);
+            }
 
-            return response()->json(['success' => 'Successfully added to Wishlist']);
+            
         }else{
             return response()->json(['error' => 'First Login to your Account']);
         }
