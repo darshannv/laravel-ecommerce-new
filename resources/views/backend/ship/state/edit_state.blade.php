@@ -1,0 +1,119 @@
+@extends('admin.admin_master')
+
+@section('admin_content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+    <div class="container-full">
+ 
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+
+ 
+
+          <div class="col-6">
+
+                                             <!-- Edit State -->
+            <div class="box">
+               <div class="box-header with-border">
+                 <h3 class="box-title">Edit State </h3>
+               </div>
+               <!-- /.box-header -->
+               <div class="box-body">
+                    <form method="POST" action="{{ route('state.update') }}" >
+                    @csrf
+                        <input type="hidden" name="id" value="{{ $states->id }}">
+                            <div class="container">
+
+                                <div class="form-group">
+                                    <h5>Division Name <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select  name="division_id" class="form-control">
+                                            <option value="" selected="" disabled>Select Division Name</option>
+                                            @foreach($divisions as $div)
+                                            <option value="{{ $div->id }}" {{ $div->id == $states->division_id ? 'Selected' : '' }}>{{ $div->division_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('division_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <h5>District Name <span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <select  name="district_id" class="form-control">
+                                            <option value="" selected="" disabled>Select District Name</option>
+                                            @foreach($districts as $dist)
+                                            <option value="{{ $dist->id }}" {{ $dist->id == $states->district_id ? 'Selected' : '' }}>{{ $dist->district_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('district_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                </div>
+                                </div>
+
+                          
+                             <div class="form-group">
+                                <h5>State Name <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="state_name"  class="form-control" value="{{ $states->state_name }}"> 
+                                    @error('state_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                            </div>
+                          </div>
+
+   
+
+                            <div class="text-xs-right">
+                              
+                              <input type="submit"  class="btn btn-rounded btn-primary mb-5" value="Update">
+                            </div>
+                          </div>
+                    </form>
+                   </div>
+               </div>
+               <!-- /.box-body -->
+             </div>
+             <!-- /.box -->
+ 
+            
+             <!-- /.box -->          
+           </div>
+       
+        <!-- /.row -->
+      </section>
+      <!-- /.content -->
+    
+    </div>
+
+<script>
+
+$(document).ready(function(){
+    $('select[name="division_id"]').on('change', function(){
+        var division_id = $(this).val();
+        if(division_id){
+            $.ajax({
+                url : "{{ url('/shipping/district/ajax') }}/"+division_id,
+                type: "GET",
+                dataType: "json",
+                success:function(data){
+                    var d = $('select[name="district_id"]').empty();
+                    $.each(data, function(key, value){
+                        $('select[name="district_id"]').append('<option value="'+ value.id +'">' + value.district_name 
+                            + '</option>')
+                    });
+                },
+            });
+        } else{
+            alert('danger');
+        }
+    });
+</script>
+
+@endsection

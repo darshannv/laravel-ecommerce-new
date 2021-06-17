@@ -12,7 +12,7 @@
                 @if(session()->get('language') == 'hindi')   इच्छा-सूची @else Wishlist @endif</a></li>
               <li><a href="{{ route('myCart') }}"><i class="icon fa fa-shopping-cart"></i>
                 @if(session()->get('language') == 'hindi')   मेरी टोकरी @else My Cart @endif</a></li>
-              <li><a href="#"><i class="icon fa fa-check"></i>
+              <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>
                 @if(session()->get('language') == 'hindi')   चेक आउट @else Checkout @endif</a></li>
               @guest
               <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
