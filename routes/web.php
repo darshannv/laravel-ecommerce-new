@@ -14,6 +14,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\WishlistController;
 
 /*
@@ -172,13 +174,17 @@ Route::middleware(['auth:admin'])->group(function(){
             Route::post('/state/update', [ShippingAreaController::class, 'stateUpdate'])->name('state.update');
             Route::get('/state/delete/{id}', [ShippingAreaController::class, 'stateDelete'])->name('state.delete');
 
-            //------- Ajax Call --------------
-             Route::get('/district/ajax/{division_id}', [ShippingAreaController::class, 'getDistrict']);
-
+           
+             //------- Ajax District Call --------------
+         Route::get('/district/ajax/{division_id}', [ShippingAreaController::class, 'getDistrict']);
         
         });
 
+        
+
 });
+
+
 
 //user routes
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
@@ -241,6 +247,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     //---------------  Wishlist Remove -------------------------------
     Route::get('/wishlist-remove/{id}', [WishlistController::class, 'removeWishlistProduct']);
 
+     //---------------  Stripe Order  -------------------------------
+     Route::post('/stripe/order', [StripeController::class, 'stripeOrder'])->name('stripe.order');
    
 });
 
@@ -267,3 +275,11 @@ Route::get('/coupon-remove', [CartController::class, 'couponRemove']);
 
 //-------- checkout -----------------------
 Route::get('/checkout', [CartController::class, 'checkoutCreate'])->name('checkout');
+
+
+//ajax district call
+Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'districtGetAjax']);
+//ajax state call
+Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'stateGetAjax']);
+//checkout store
+Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');

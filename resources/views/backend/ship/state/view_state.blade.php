@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 
 @section('admin_content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 
 
@@ -99,9 +99,9 @@
                                     <div class="controls">
                                         <select  name="district_id" class="form-control">
                                             <option value="" selected="" disabled>Select District Name</option>
-                                            @foreach($districts as $dist)
+                                            {{-- @foreach($districts as $dist)
                                             <option value="{{ $dist->id }}">{{ $dist->district_name }}</option>
-                                            @endforeach
+                                            @endforeach --}}
                                         </select>
                                         @error('district_id')
                                     <span class="text-danger">{{ $message }}</span>
@@ -143,7 +143,7 @@
       <!-- /.content -->
     
     </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
 $(document).ready(function(){
@@ -166,6 +166,7 @@ $(document).ready(function(){
             alert('danger');
         }
     });
+  });
 </script>
 
 @endsection
