@@ -46,7 +46,8 @@ class CheckoutController extends Controller
         return view('frontend.payment.stripe', compact('data'));
 
        }else{
-
+        return view('frontend.payment.cash', compact('data', 'cartTotal'));
+        
        }
        
     }

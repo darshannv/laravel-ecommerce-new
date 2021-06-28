@@ -54,6 +54,7 @@ Ecommerce
 <td> Name : {{ $order['name'] }}</td>
 <td> Amount : {{ $order['amount'] }}</td>
 <td> Email : {{ $order['email'] }}</td>
+<td> Payment Method : {{ $order['payment_type'] }}</td>
 </tr>
 </table>
 

@@ -618,8 +618,9 @@ function cartRemove(id){
           url: "{{ url('/coupon-apply') }}",
           success:function(data){
             couponCalculation();
-          $('#couponField').hide();
-
+            if(data.validity == true){
+                $('#couponField').hide();
+            }
 
             const Toast = Swal.mixin({
                 toast: true,

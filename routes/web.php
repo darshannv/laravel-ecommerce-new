@@ -13,7 +13,9 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CashOrderController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\WishlistController;
@@ -249,6 +251,16 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
 
      //---------------  Stripe Order  -------------------------------
      Route::post('/stripe/order', [StripeController::class, 'stripeOrder'])->name('stripe.order');
+
+
+     //---------------  Cash Order  -------------------------------
+     Route::post('/cash/order', [CashOrderController::class, 'cashOrder'])->name('cash.order');
+
+      //--------------- My Orders Page -------------------------------
+    Route::get('/my-orders', [AllUserController::class, 'myOrders'])->name('my.orders');
+
+     //--------------- View Orders  -------------------------------
+     Route::get('/order-details/{order_id}', [AllUserController::class, 'orderDetails']);
    
 });
 
