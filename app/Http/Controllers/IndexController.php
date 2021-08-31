@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Slider;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\MultiImg;
-use App\Models\Product;
-use App\Models\Slider;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Models\SubSubCategory;
@@ -25,14 +25,14 @@ class IndexController extends Controller
         $sliders = Slider::where('status',  1)->orderBy('id', 'DESC')->limit(3)->get();
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
 
-        
+        $skip_product_0 = $skip_category_0 = $skip_category_1 = $skip_product_1 = null;
         // return $skip_category->id;
         // die();
-        $skip_category_0 = Category::skip(1)->first();
-        $skip_product_0 = Product::where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->get();
+        // $skip_category_0 = Category::skip(1)->first();
+        // $skip_product_0 = Product::where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->get();
 
-        $skip_category_1 = Category::skip(3)->first();
-        $skip_product_1 = Product::where('category_id', $skip_category_1->id)->orderBy('id', 'DESC')->get();
+        // $skip_category_1 = Category::skip(3)->first();
+        // $skip_product_1 = Product::where('category_id', $skip_category_1->id)->orderBy('id', 'DESC')->get();
 
 
         return view('frontend.index', compact('categories', 'sliders', 'products', 'featured', 'hot_deals',

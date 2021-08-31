@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateSubSubCategoriesTable extends Migration
 {
@@ -18,7 +18,7 @@ class CreateSubSubCategoriesTable extends Migration
             $table->integer('category_id');
             $table->integer('subcategory_id');
             $table->string('subsubcategory_name_en');
-            $table->string('subsubcategory_hin_en');
+            $table->string('subsubcategory_name_hin');
             $table->string('subsubcategory_slug_en');
             $table->string('subsubcategory_slug_hin');
             $table->timestamps();

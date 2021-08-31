@@ -7,10 +7,10 @@ use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\MultiImg;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Subcategory;
+use Illuminate\Http\Request;
 use App\Models\SubSubCategory;
+use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller

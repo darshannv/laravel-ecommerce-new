@@ -499,7 +499,7 @@ Home | Ecommerce Zersys
 
                                 <!--------------- Skip Products --------> 
 
-          <section class="section featured-product wow fadeInUp">
+          {{-- <section class="section featured-product wow fadeInUp">
             <h3 class="section-title">
               @if(session()->get('language') == 'hindi'){{ $skip_category_0->category_name_hin }} @else{{ $skip_category_0->category_name_en }}  @endif
               </h3>
@@ -524,18 +524,18 @@ Home | Ecommerce Zersys
                     @endif
                     <div class="tag new"><span>{{ round($discount) }} %</span></div>
                   </div>
-                    </div>
+                    </div> --}}
                     <!-- /.product-image -->
                     
-                    <div class="product-info text-left">
+                    {{-- <div class="product-info text-left">
                       <h3 class="name"><a href="{{  url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">
                         @if(session()->get('language') == 'hindi'){{ $product->product_name_hin }} @else{{ $product->product_name_en }}  @endif</a></h3>
                       <div class="rating rateit-small"></div>
                       <div class="description"></div>
-                      <div class="product-price"> <span class="price">$ {{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
+                      <div class="product-price"> <span class="price">$ {{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div> --}}
                       <!-- /.product-price --> 
                       
-                    </div>
+                    {{-- </div>
                     <!-- /.product-info -->
                     <div class="cart clearfix animate-effect">
                       <div class="action">
@@ -634,7 +634,7 @@ Home | Ecommerce Zersys
               @endforeach
             
               <!-- /.item --> 
-            </div>
+            </div> --}}
             <!-- /.home-owl-carousel --> 
           </section>
                                        <!--------------- Skip_category_1 Products End --------> 
