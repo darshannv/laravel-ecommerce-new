@@ -5,9 +5,9 @@
 			<a class="nav-link" href="javascript:void(0)">FAQ</a>
 		  </li>
 		  <li class="nav-item">
-			<a class="nav-link" href="#">Ecommerce Zersys</a>
+			<a class="nav-link" href="#">Ecommerce</a>
 		  </li>
 		</ul>
     </div>
-	  &copy; 2021 <a href="#">Ecommerce Zersys</a>. All Rights Reserved.
+	  &copy; 2021 <a href="#">Ecommerce </a>. All Rights Reserved.
   </footer>

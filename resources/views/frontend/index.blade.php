@@ -4,7 +4,8 @@
 @section('main_content')
 
 @section('title')
-Home | Ecommerce Zersys
+Home | Ecommerce 
+
 @endsection
 
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
